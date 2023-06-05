@@ -13,6 +13,6 @@ router.get('/get', getTodoItemsHandler);
 router.get('/get/today', getTodoItemsDueTodayHandler);
 router.delete('/delete-all', deleteAllTodoHandler);
 router.delete('/delete/:todoId', deleteTodoHandler);
-router.put('/update', updateTodoHandler);
+router.put('/update/:todoId', updateTodoHandler);
 
 module.exports = router;

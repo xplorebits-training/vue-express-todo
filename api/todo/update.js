@@ -1,11 +1,11 @@
 const TodoModel = require('../../model/todo');
 
 const updateTodoHandler = async (req, res) => {
-  const { userId } = req.user;
   const { title, description, due } = req.body;
+  const todoId = req.params.todoId;
 
   try {
-    const existingTodo = await TodoModel.findOne({ userId });
+    const existingTodo = await TodoModel.findById(todoId);
     Object.assign(existingTodo, { title, description, due });
 
     try {
