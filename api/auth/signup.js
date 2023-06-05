@@ -17,7 +17,7 @@ const signupHandler = async (req, res) => {
       password,
       phoneNumber,
     });
-    console.log(User)
+
     try {
       await User.validate();
       const hashPassword = await getHashFromPassword(password);

@@ -28,8 +28,7 @@ const setProfileHandler = async function (req, res) {
       return res.status(400).send({ error: err.message });
     }
   } catch (error) {
-    console.log(error);
-    res.status(500).send({ error: 'Server error' });
+    return res.status(500).send({ error: 'Server error' });
   }
 };
 

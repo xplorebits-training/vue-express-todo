@@ -2,12 +2,12 @@ const TodoModel = require('../../../model/todo');
 const { Types: { ObjectId } } = require('mongoose');
 
 const getTodoItemsHandler = async (req, res) => {
-
   try {
     const { options } = req.body;
+    const { userId } = req.user;
     const offsetId = options?.offset || null;
 
-    const query = {};
+    const query = { userId };
 
     if (offsetId) {
       query._id = { $lt: new ObjectId(offsetId) };

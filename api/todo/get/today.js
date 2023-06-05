@@ -1,7 +1,7 @@
 const TodoModel = require('../../../model/todo');
 
 const getTodoItemsDueTodayHandler = async (req, res) => {
-
+  const { userId } = req.user
   try {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -13,7 +13,8 @@ const getTodoItemsDueTodayHandler = async (req, res) => {
       due: {
         $gte: today.toISOString(),
         $lt: endDate.toISOString()
-      }
+      },
+      userId
     });
 
     return res.status(200).json({ todoItems });
