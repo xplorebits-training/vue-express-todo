@@ -10,7 +10,14 @@ const setProfileHandler = async function (req, res) {
     if (!existUser) {
       return res.status(404).send({ message: 'User not found' });
     }
-    Object.assign(existUser, { firstName, lastName, phoneNumber });
+
+    const newData = {
+      firstName: firstName || existUser.firstName,
+      lastName: lastName || existUser.lastName,
+      phoneNumber: phoneNumber || existUser.phoneNumber
+    }
+
+    Object.assign(existUser, newData);
 
     try {
       await existUser.validate();

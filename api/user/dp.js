@@ -10,11 +10,16 @@ const dpHandler = async (req, res) => {
 
   const { originalname, size, mimetype } = req.file;
   const { userId } = req.user;
-
   const extension = path.extname(originalname);
   const filename = `${req.file.filename}${extension}`;
 
   const filePath = path.join(process.env.HOME, 'user-dp', filename);
+
+  const isImage = mimetype.split('/')[0];
+  if (isImage !== 'image') {
+    return res.status(415).send({ message: 'Invalid image format' });
+  }
+
   try {
     await fs.rename(req.file.path, filePath);
 
@@ -34,7 +39,6 @@ const dpHandler = async (req, res) => {
 
     res.status(200).json({ success: 'User dp uploaded successfully' });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ error: 'Internal server error' });
   }
 };

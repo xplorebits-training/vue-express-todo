@@ -16,10 +16,10 @@ const signinHandler = async (req, res) => {
       const newToken = generateToken(User);
       return res.status(200).send(newToken);
     } else {
-      return res.status(401).send('Wrong password');
+      return res.status(404).send('Wrong password');
     }
   } catch (error) {
-    return res.status(401).send({ message: 'Invalid token' });
+    return res.status(404).send({ message: 'Invalid token' });
   }
 };
 

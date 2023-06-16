@@ -9,7 +9,6 @@ const getProfileHandler = async (req, res) => {
     if (!User) {
       return res.status(404).json({ message: 'User not found' });
     }
-    console.log(User)
     return res.status(200).send({
       "firstName": User.firstName,
       "lastName": User.lastName,

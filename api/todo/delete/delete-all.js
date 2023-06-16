@@ -5,7 +5,11 @@ const deleteAllTodoHandler = async (req, res) => {
 
   try {
     const existingUser = await TodoModel.deleteMany({ userId });
-    return res.send({ message: "All items are deleted", 'todo-items': existingUser });
+    if (existingUser.deletedCount === 0) {
+      return res.status(404).send('No todo items found');
+    } else {
+      return res.send({ message: "All items are deleted", 'todo-items': existingUser });
+    }
   } catch (error) {
     return res.status(500).send({ message: "Delete todo item failed" });
   }
